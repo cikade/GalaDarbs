@@ -7,27 +7,12 @@ public class Order {
     private boolean payed;
     private boolean isCompleted;
 
-
-
-    public Order() {
-        super();
-    }
-
-    public Order(int orderId, int userId, String productName, boolean payed, String productSize) {
-        this(orderId,userId,productName,productSize,0,false,false);
-    }
-
-    public Order(int orderId, int userId, String productName, String productSize, boolean payed, double productPrice) {
-        this(orderId,userId,productName,productSize,productPrice,false,false);
-    }
-
-    public Order(int orderId, int userId, String productName, String productSize, double productPrice, boolean payed, boolean isCompleted) {
-        this.orderId = orderId;
+    public Order(int userId, String productName, String productSize, double productPrice) {
         this.userId = userId;
         this.productName = productName;
         this.productSize = productSize;
         this.productPrice = productPrice;
-        this.payed = payed;
+        this.payed = false;
         this.isCompleted = false;
     }
 
@@ -71,14 +56,6 @@ public class Order {
         this.productPrice = productPrice;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(boolean isCompleted) {
-        this.isCompleted = isCompleted;
-    }
-
     public boolean isPayed() {
         return payed;
     }
@@ -87,12 +64,24 @@ public class Order {
         this.payed = payed;
     }
 
-    @Override
-    public String toString() {
-        return "Order [orderId=" + orderId + ", userId=" + userId + ", productName=" + productName + ", productSize="
-                + productSize + ", productPrice=" + productPrice + ", isCompleted=" + isCompleted + "]";
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userId=" + userId +
+                ", productName='" + productName + '\'' +
+                ", productSize='" + productSize + '\'' +
+                ", productPrice=" + productPrice +
+                ", payed=" + payed +
+                ", isCompleted=" + isCompleted +
+                '}';
+    }
 }

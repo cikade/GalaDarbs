@@ -1,12 +1,27 @@
+import java.util.Date;
+
 public class User {
     private int id;
     private String userName;
     private String passWord;
     private int userLevel;
+    private boolean isDeleted;
+    private Date lastSeen;
 
-    public User(String userName, String passWord) {
+    public User(String userName, String userPass) {
         this.userName = userName;
-        this.passWord = passWord;
+        this.passWord = userPass;
+        this.userLevel = 0;
+        this.isDeleted = false;
+        this.lastSeen = null;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUserName() {
@@ -33,12 +48,20 @@ public class User {
         this.userLevel = userLevel;
     }
 
-    public int getId() {
-        return id;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Date getLastSeen() {
+        return lastSeen;
+    }
+
+    public void setLastSeen(Date lastSeen) {
+        this.lastSeen = lastSeen;
     }
 
     @Override
@@ -48,6 +71,8 @@ public class User {
                 ", userName='" + userName + '\'' +
                 ", passWord='" + passWord + '\'' +
                 ", userLevel=" + userLevel +
+                ", isDeleted=" + isDeleted +
+                ", lastSeen=" + lastSeen +
                 '}';
     }
 }

@@ -2,61 +2,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductTable {
-    private List<Products> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
-    public ProductTable() {
-
-        Products product1 = new Products("Margarita","Pizza","L",5.95);
-        Products product2 = new Products("Cola","Drink","S",2.13);
-        Products product3 = new Products("Nuggets","Other","M",5.31);
-
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
+    public void add(Product product) {
+        product.setID(products.size());
+        products.add(product);
     }
 
-    public Products get(int id) {
-        return products.get(id);
-    }
-
-    public double priceCheck(String product,String size) {
+    public boolean productExists(Product product) {
         for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductName().equals(product) && products.get(i).getProductSize().equals(size)) {
-                return products.get(i).getProductPrice();
+            if (products.get(i).getProductName().equals(product.getProductName()) && products.get(i).getProductSize().equals(product.getProductSize())) {
+                return true;
             }
         }
-        return 0.00;
-    }
-
-    public String getProductByType(String type) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductType() == type) return products.get(i).getProductName();
-        }
-        return null;
-    }
-
-    public int size() {
-        return products.size();
-    }
-
-    public boolean existsProduct(String s) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductName().equals(s)) return true;
-        }
         return false;
     }
 
-    public boolean existsSize(String s) {
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getProductSize().equals(s)) return true;
+    public void updateProduct(Product appendProduct, Product newData) {
+        if (productExists(appendProduct)) {
+            products.get(appendProduct.getID()).setProductName(newData.getProductName());
+            products.get(appendProduct.getID()).setProductPrice(newData.getProductPrice());
+            products.get(appendProduct.getID()).setProductSize(newData.getProductSize());
+            products.get(appendProduct.getID()).setProductType(newData.getProductType());
         }
-        return false;
+    }
+
+    public void deleteProduct(Product product) {
+        products.get(product.getID()).setDeleted(true);
     }
 
     @Override
     public String toString() {
-        return "ProductTable [products=" + products + "]";
+        return "ProductTable{" +
+                "products=" + products +
+                '}';
     }
-
-
 }

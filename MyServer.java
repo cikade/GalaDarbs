@@ -1,29 +1,19 @@
 public interface MyServer {
-    boolean register(String userName,String passWord);
+    //user
+    void addUser(User user);
 
-    boolean logIn(String userName, String passWord);
+    void updateUser(User user, User newData);
 
-    User getUserData(String userName, String passWord);
+    User getUser(User user);
 
-    boolean deleteAccount(User me);
+    void deleteUser(User user);
 
+    //product
+    void addProduct(Product product);
 
+    void updateProduct(Product product, Product newData);
 
-    int getOrderId(int orderUserId);
+    Product getProduct(Product product);
 
-    int newOrder(int userId);
-
-    String allAvailableProductsTypes();
-
-    String getProductsFromType(String type);
-
-    boolean existsProduct(String s);
-
-    String getProductsSizes(String type);
-
-    boolean existsProductsSize(String s);
-
-    void addToOrder(int orderId, int userId, String product, String size);
-
-    String usersOrder(int orderId);
+    void deleteProduct(Product product);
 }

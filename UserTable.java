@@ -2,50 +2,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserTable {
-	private List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
-	public UserTable() {
-	}
+    public UserTable() {
+    }
 
-	public UserTable(List<User> users) {
-		this.users = users;
-	}
+    public void add(User user) {
+        user.setId(getSize()+1);
+        users.add(user);
+    }
 
-	public final List<User> getUsers() {
-		return users;
-	}
+    @Override
+    public String toString() {
+        return "UserTable{" +
+                "users=" + users +
+                '}';
+    }
 
-	public final void setUsers(List<User> users) {
-		this.users = users;
-	}
+    public int getSize() {
+        return users.size();
+    }
 
-	public void add(User user) {
-		users.add(user);
-	}
+    public boolean userExists(User user) {
+        for (int i = 0; i < getSize(); i++) {
+            if (users.get(i).getUserName().equals(user.getUserName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public int getSize() {
-		return users.size();
-	}
+    public void updateUser(User appendUser, User newData) {
+        if (userExists(appendUser)) {
+            users.get(appendUser.getId()-1).setUserName(newData.getUserName());
+            users.get(appendUser.getId()-1).setPassWord(newData.getPassWord());
+            users.get(appendUser.getId()-1).setUserLevel(newData.getUserLevel());
+        }
+    }
 
-	public int logIn(String userName,String passWord) {
-		User result = users.stream().filter(users -> userName.equals(users.getUserName())).findFirst().orElse(null);
-		if (result != null) {
-			System.out.println("Welcome back!");
-			return result.getUserLevel();
-		}
-		System.out.println("This email isn't registered in this system!");
-		return 0;
-	}
-
-	public void updateUser(int id, String userName, String passWord, int userLevel) {
-		User user = users.get(id - 1);
-		user.setUserName(userName);
-		user.setPassWord(passWord);
-		user.setUserLevel(userLevel);
-	}
-
-	public void deleteUser(int id) {
-		users.remove(id);
-	}
-
+    public void deleteUser(User user) {
+        users.get(user.getId()-1).setDeleted(true);
+    }
 }
